@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AddressHash } from "../api/addresses";
 import TransactionsList from "./TransactionsList";
 
@@ -10,7 +10,14 @@ interface LocationState {
 const TransactionsPage = () => {
   const location = useLocation();
   const { addresses } = location.state as LocationState;
-  return <TransactionsList addresses={addresses} />;
+  return (
+    <div>
+      <Link to="/">
+        <button>Home</button>
+      </Link>
+      <TransactionsList addresses={addresses} />
+    </div>
+  );
 };
 
 export default TransactionsPage;

@@ -5,7 +5,6 @@ import {
   GetAddressesDataResponse,
   getAddressesData,
 } from "../api/addresses";
-import TransactionsList from "./TransactionsList";
 
 import "./AddressesSelector.css";
 import { Link } from "react-router-dom";

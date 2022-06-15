@@ -1,7 +1,5 @@
 import React from "react";
 
-const MAX_PAGE_NUMBER_PER_SIDE = 3; // The max number of pages before or after this page which can be clicked.
-
 /**
  * Allow user to change the page of an element which supports pagination.
  */

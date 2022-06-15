@@ -18,17 +18,10 @@ const TransactionsList = ({ addresses }: { addresses: AddressHash[] }) => {
     GetAddressesDataResponse | undefined
   >();
 
-  const refreshAddressesData = async () => {
-    const newAddressesData = await getAddressesData(
-      addresses,
-      PAGE_SIZE,
-      (page - 1) * PAGE_SIZE
-    );
-    setAddressesData(newAddressesData);
-  };
-
   useEffect(() => {
-    refreshAddressesData();
+    getAddressesData(addresses, PAGE_SIZE, (page - 1) * PAGE_SIZE).then(
+      (data) => setAddressesData(data)
+    );
   }, [addresses, page]);
 
   if (!addressesData) return null;
@@ -41,7 +34,13 @@ const TransactionsList = ({ addresses }: { addresses: AddressHash[] }) => {
 
   return (
     <div>
-      <button onClick={() => refreshAddressesData()}>
+      <button
+        onClick={() => {
+          getAddressesData(addresses, PAGE_SIZE, (page - 1) * PAGE_SIZE).then(
+            (data) => setAddressesData(data)
+          );
+        }}
+      >
         Refresh Transactions
       </button>
       {addressesData.txs.map((transaction) => (

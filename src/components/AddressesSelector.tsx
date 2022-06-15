@@ -8,6 +8,7 @@ import {
 import TransactionsList from "./TransactionsList";
 
 import "./AddressesSelector.css";
+import { Link } from "react-router-dom";
 
 /**
  * Allows user to manage a list of Addresses and display their balances.
@@ -22,13 +23,8 @@ const AddressesSelector = () => {
     GetAddressesDataResponse | undefined
   >();
 
-  const refreshAddressesData = async () => {
-    const newAddressesData = await getAddressesData(addresses, 0, 0);
-    setAddressesData(newAddressesData);
-  };
-
   useEffect(() => {
-    refreshAddressesData();
+    getAddressesData(addresses, 0, 0).then((data) => setAddressesData(data));
   }, [addresses]);
 
   const submitInputAddress = () => {
@@ -67,7 +63,10 @@ const AddressesSelector = () => {
 
   return (
     <div>
-      <div>
+      <Link to="/transactions" state={{ addresses }}>
+        <button style={{ margin: "16px" }}>View transactions</button>
+      </Link>
+      <div style={{ margin: "16px" }}>
         <input
           type="text"
           placeholder="Add address"
@@ -77,7 +76,16 @@ const AddressesSelector = () => {
         />
         <button onClick={() => submitInputAddress()}>Add</button>
       </div>
-      <button onClick={() => refreshAddressesData()}>Refresh Balances</button>
+      <button
+        style={{ margin: "16px" }}
+        onClick={() =>
+          getAddressesData(addresses, 0, 0).then((data) =>
+            setAddressesData(data)
+          )
+        }
+      >
+        Refresh Balances
+      </button>
       <table className="addressesTable">
         <thead>
           <tr>
@@ -88,7 +96,6 @@ const AddressesSelector = () => {
         </thead>
         <tbody>{addressElements}</tbody>
       </table>
-      <TransactionsList addresses={addresses} />
     </div>
   );
 };

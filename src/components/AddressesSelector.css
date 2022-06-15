@@ -1,0 +1,10 @@
+.addressesTable {
+  margin: 16px;
+  border-collapse: collapse;
+}
+
+table.addressesTable th,
+table.addressesTable td {
+  border: 1px solid black;
+  border-spacing: 0px!;
+}

@@ -1,0 +1,10 @@
+.transaction {
+  margin: 16px;
+}
+
+div.transaction table,
+div.transaction th,
+div.transaction td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
